@@ -1,0 +1,18 @@
+﻿@page
+@using System.Data.SqlClient;
+@using DemoWebApp.Models;
+@inject IConfiguration configuration;
+
+@{
+    try
+    {
+        DAL dal = new DAL();
+        string id = Request.Query["id"];
+        dal.DeleteUser(id, configuration);
+    }
+    catch(Exception)
+    {
+        
+    }
+    Response.Redirect("/User/Index");
+}

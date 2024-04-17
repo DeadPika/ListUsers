@@ -1,0 +1,45 @@
+﻿@page
+@model DemoWebApp.Pages.User.IndexModel
+@{
+}
+
+<a href="/User/Create" class="btn btn-primary">Добавить пользователя</a>
+<br/>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Имя</td>
+            <td>Фамилия</td>
+            <td>Редактировать</td>
+            <td>Удалить</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach(var item in Model.listUsers)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>
+                        <a href="/User/Edit?id=@item.Id" class="btn btn-primary">Редактировать</a>
+                    </td>
+                    <td>
+                        <a onclick="return onDelete(@item.Id)" class="btn btn-danger" >Удалить</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<script>
+    function onDelete(id)
+    {
+        if(window.confirm("Вы уверены, что хотите удалить этого пользователя?"))
+        {
+            window.location.href = "/User/Delete?id=" + id;
+        }
+    }
+</script>
